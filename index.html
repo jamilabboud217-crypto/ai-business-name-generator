@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Business Name Generator Pro - Generate Perfect Names in Seconds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-tool {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .generate-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .pricing-info {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-info h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .results-section {
+            display: none;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .name-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .name-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .name-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .name-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .demo-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-tool {
+                padding: 20px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 AI Business Name Generator Pro</h1>
+            <p>Generate professional business names with AI-powered branding insights</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Industry-Specific</h3>
+                <p>Names tailored to your specific industry and target market</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Results</h3>
+                <p>Get 10 professional names with explanations in 30 seconds</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>AI-Powered</h3>
+                <p>Advanced AI analyzes trends and creates memorable names</p>
+            </div>
+        </div>
+        
+        <div class="main-tool">
+            <div class="demo-notice">
+                <strong>DEMO VERSION:</strong> This is a working prototype. In the live version, users would pay $15 for premium AI-generated names with domain availability checking.
+            </div>
+            
+            <div class="pricing-info">
+                <h3>💎 Premium AI Name Generation</h3>
+                <p><strong>$15 per session</strong> - Get 10 professional business names + branding insights</p>
+                <p>🎁 <strong>Bonus:</strong> Domain availability check + Logo concepts</p>
+            </div>
+            
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="industry">What industry is your business in?</label>
+                    <select id="industry">
+                        <option value="">Select your industry...</option>
+                        <option value="technology">Technology & Software</option>
+                        <option value="healthcare">Healthcare & Medical</option>
+                        <option value="finance">Finance & Investment</option>
+                        <option value="retail">Retail & E-commerce</option>
+                        <option value="food">Food & Restaurant</option>
+                        <option value="fitness">Fitness & Wellness</option>
+                        <option value="consulting">Consulting & Services</option>
+                        <option value="real-estate">Real Estate</option>
+                        <option value="education">Education & Training</option>
+                        <option value="marketing">Marketing & Advertising</option>
+                        <option value="creative">Creative & Design</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="keywords">Key words or concepts (optional)</label>
+                    <input type="text" id="keywords" placeholder="e.g., fast, reliable, innovative, premium">
+                </div>
+                
+                <div class="input-group">
+                    <label for="target-audience">Who is your target audience?</label>
+                    <input type="text" id="target-audience" placeholder="e.g., small businesses, millennials, professionals">
+                </div>
+                
+                <div class="input-group">
+                    <label for="style">Preferred naming style</label>
+                    <select id="style">
+                        <option value="modern">Modern & Tech-savvy</option>
+                        <option value="professional">Professional & Corporate</option>
+                        <option value="creative">Creative & Unique</option>
+                        <option value="simple">Simple & Memorable</option>
+                        <option value="luxury">Luxury & Premium</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="description">Brief business description</label>
+                    <textarea id="description" rows="3" placeholder="Describe what your business does in 1-2 sentences..."></textarea>
+                </div>
+            </div>
+            
+            <button class="generate-btn" onclick="generateNames()">
+                🚀 Generate Premium Business Names ($15)
+            </button>
+            
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>AI is crafting your perfect business names...</p>
+            </div>
+            
+            <div class="results-section" id="results">
+                <h3>🎉 Your AI-Generated Business Names</h3>
+                <div class="results-grid" id="results-grid"></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 AI Business Name Generator Pro. All rights reserved.</p>
+            <p>Contact: support@businessnamegenerator.com</p>
+        </div>
+    </div>
+
+    <script>
+        function generateNames() {
+            const industry = document.getElementById('industry').value;
+            const keywords = document.getElementById('keywords').value;
+            const targetAudience = document.getElementById('target-audience').value;
+            const style = document.getElementById('style').value;
+            const description = document.getElementById('description').value;
+            
+            if (!industry) {
+                alert('Please select your industry first!');
+                return;
+            }
+            
+            // Show loading
+            document.querySelector('.loading').style.display = 'block';
+            document.querySelector('.generate-btn').disabled = true;
+            document.querySelector('.generate-btn').textContent = 'Generating...';
+            
+            // Simulate AI processing (in real version, this would call OpenAI API)
+            setTimeout(() => {
+                const names = generateDemoNames(industry, keywords, targetAudience, style, description);
+                displayResults(names);
+                
+                // Hide loading
+                document.querySelector('.loading').style.display = 'none';
+                document.querySelector('.generate-btn').disabled = false;
+                document.querySelector('.generate-btn').textContent = '🚀 Generate More Names ($15)';
+            }, 3000);
+        }
+        
+        function generateDemoNames(industry, keywords, targetAudience, style, description) {
+            // Demo name generation logic (in real version, this would use AI)
+            const nameTemplates = {
+                technology: [
+                    { name: "VelocityTech", explanation: "Combines speed concept with technology, perfect for fast software solutions" },
+                    { name: "CodeCraft Studios", explanation: "Emphasizes craftsmanship in coding, appeals to quality-focused clients" },
+                    { name: "PixelForge", explanation: "Suggests creation and innovation in digital design" },
+                    { name: "DataFlow Systems", explanation: "Professional name indicating smooth data management" },
+                    { name: "CloudVault", explanation: "Security-focused name for cloud storage solutions" }
+                ],
+                healthcare: [
+                    { name: "WellSpring Medical", explanation: "Evokes health and vitality, trustworthy for healthcare" },
+                    { name: "LifeBridge Clinic", explanation: "Suggests connecting patients to better health" },
+                    { name: "PuraCare", explanation: "Pure + Care, emphasizes clean, quality healthcare" },
+                    { name: "VitalPoint Health", explanation: "Focus on essential health services" },
+                    { name: "Harmony Medical", explanation: "Suggests balance and holistic care" }
+                ],
+                finance: [
+                    { name: "Cornerstone Capital", explanation: "Implies stability and foundational financial strength" },
+                    { name: "Precision Wealth", explanation: "Suggests accuracy and attention to detail in wealth management" },
+                    { name: "TrustBridge Financial", explanation: "Builds confidence with trust concept" },
+                    { name: "Nexus Investments", explanation: "Modern, connection-focused investment firm" },
+                    { name: "Apex Financial", explanation: "Peak/summit imagery suggests reaching financial goals" }
+                ],
+                default: [
+                    { name: "ProVantage Solutions", explanation: "Professional advantage, works across industries" },
+                    { name: "Catalyst Enterprises", explanation: "Suggests driving change and growth" },
+                    { name: "Pinnacle Partners", explanation: "Peak performance and collaboration" },
+                    { name: "Strategic Edge", explanation: "Competitive advantage focus" },
+                    { name: "Momentum Group", explanation: "Forward movement and progress" }
+                ]
+            };
+            
+            const selectedNames = nameTemplates[industry] || nameTemplates.default;
+            
+            // Add some variety based on keywords and style
+            let customizedNames = selectedNames.map(item => ({
+                ...item,
+                explanation: item.explanation + ` Perfect for ${targetAudience || 'your target market'}.`
+            }));
+            
+            // Add a few more generated names based on keywords
+            if (keywords) {
+                const keywordNames = [
+                    { name: `${keywords.split(',')[0].trim()}Pro`, explanation: "Incorporates your key concept with professional suffix" },
+                    { name: `Smart${keywords.split(',')[0].trim()}`, explanation: "Modern, intelligent approach to your core concept" }
+                ];
+                customizedNames = [...customizedNames.slice(0, 8), ...keywordNames];
+            }
+            
+            return customizedNames.slice(0, 10);
+        }
+        
+        function displayResults(names) {
+            const resultsSection = document.getElementById('results');
+            const resultsGrid = document.getElementById('results-grid');
+            
+            resultsGrid.innerHTML = '';
+            
+            names.forEach((nameData, index) => {
+                const nameCard = document.createElement('div');
+                nameCard.className = 'name-card';
+                nameCard.innerHTML = `
+                    <h4>${nameData.name}</h4>
+                    <p>${nameData.explanation}</p>
+                `;
+                resultsGrid.appendChild(nameCard);
+            });
+            
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Add some interactive enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add typing effect for header
+            const headerText = "Generate professional business names with AI-powered branding insights";
+            const headerElement = document.querySelector('.header p');
+            
+            // Add form validation
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
